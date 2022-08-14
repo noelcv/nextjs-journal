@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import { useRouter } from 'next/router'
 
 const Note = () => {
@@ -10,14 +11,13 @@ const Note = () => {
   //for programmatic routing use the router.push method
   
   return (
-    <div>
+    <div sx={{variant: 'containers.page'}}>
       <button onClick={() => router.push('/')}>Go Home</button>
-      <button onClick={() => router.push('/notes')}>Go to Notes Index</button>
-    <h1>
-      Note { id }
-    </h1>
+      <button onClick={() => router.push('/notes')}>Go to Notes Index</button>  
+      <h1>Note: {id} </h1>
     </div>
   )
 }
 
 export default Note;
+
