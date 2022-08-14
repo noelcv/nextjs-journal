@@ -1,7 +1,16 @@
 import React from 'react';
+import { useRouter } from 'next/router'
 
-const Page = () => (
-  <div>Note Page</div>
-)
+const Page = () => {
+  const router = useRouter();
+  //this id will be matching the [id] from the file name
+  const { id } = router.query;
+  
+  return (
+    <h1>
+      Note {id}
+    </h1>
+  )
+}
 
 export default Page;
