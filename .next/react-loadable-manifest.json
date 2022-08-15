@@ -1,4 +1,10 @@
 {
+  "../src/components/Browser": [
+    {
+      "id": "./src/components/Browser.tsx",
+      "file": "static/chunks/1.js"
+    }
+  ],
   "./dev/noop": [
     {
       "id": "./node_modules/next/dist/client/dev/noop.js",
