@@ -1,9 +1,20 @@
+//lookup for and enable environment variables
+const nextEnv = require('next-env')
+const dotEnvLoad = require('dotenv-load')
 
+dotEnvLoad()
 
+const withEnv = nextEnv()
+/**
+ * in the background, this plugin is loading all the environment variables:
+ * {
+ * env: {
+ *    HELP_APP_URL=https://frontendmasters.com
+ *}
+ * }
+ */
 
-const config {};
-
-module.exports = withMyPlugin('args', config)
+module.exports = withEnv()
 
 
 // module.exports = (phase, {defaultConfig}) => {

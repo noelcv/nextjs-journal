@@ -2,10 +2,8 @@
 import { jsx } from 'theme-ui'
 import Link from 'next/link'
 
-const NotesIndex = () => {
+const NotesIndex = ({notes}) => {
   
-  //generate notes that will be used to generate the dynamic routes
-  const notes = new Array(15).fill(1).map((e, i) => ({id: i, title: `Note: ${i}`}))
   
   return (
     <div sx={{variant: 'containers.page'}}>
@@ -29,3 +27,13 @@ const NotesIndex = () => {
 }
 
 export default NotesIndex;
+
+export async function getServerSideProps() {
+  const res = await fetch(`http://localhost:3000/api/note`)
+  const { data } = await res.json()
+  
+  console.log(data)
+  return {
+    props: {notes: data}
+  }
+}

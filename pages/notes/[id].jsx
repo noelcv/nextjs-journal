@@ -2,11 +2,11 @@
 import { jsx } from 'theme-ui'
 import { useRouter } from 'next/router'
 
-const Note = () => {
+const Note = ({note}) => {
   const router = useRouter();
   //this id will be matching the [id] from the file name
   //params will be an array /notes/1/2/3
-  const { id } = router.query;
+  // const { id } = router.query;
   
   //for programmatic routing use the router.push method
   
@@ -14,10 +14,33 @@ const Note = () => {
     <div sx={{variant: 'containers.page'}}>
       <button onClick={() => router.push('/')}>Go Home</button>
       <button onClick={() => router.push('/notes')}>Go to Notes Index</button>  
-      <h1>Note: {id} </h1>
+      <h1>Note: {note.title} </h1>
     </div>
   )
 }
 
 export default Note;
 
+
+export async function getServerSideProps({params, req, res}) {
+  const response = await fetch(`http://localhost:3000/api/note/${params.id}`)
+  
+  if(!response.ok) {
+    res.writeHead(302, {
+      Location: '/notes'
+    })
+    res.end()
+    
+    return {
+      props: {}
+    }
+  }
+  
+  const { data } = await response.json();
+  
+  return {
+    props: {
+      note: data,
+    }
+  }
+}
